@@ -154,9 +154,13 @@
 			detected = true;
 		}
 		if(window.getComputedStyle !== undefined) {
-			var baitTemp = window.getComputedStyle(this._var.bait, null);
-			if(baitTemp && (baitTemp.getPropertyValue('display') == 'none' || baitTemp.getPropertyValue('visibility') == 'hidden')) {
-				detected = true;
+			try {
+				var baitTemp = window.getComputedStyle(this._var.bait, null);
+				if(baitTemp && (baitTemp.getPropertyValue('display') == 'none' || baitTemp.getPropertyValue('visibility') == 'hidden')) {
+					detected = true;
+				}
+			} catch(e) {
+				this._log('_checkBait', 'Error in getting computed style ' + e);
 			}
 		}
 		
